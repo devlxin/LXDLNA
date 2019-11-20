@@ -34,13 +34,25 @@
 }
 
 - (void)lx_getTransportInfoResponse:(LXUPnPTransportInfo *)transportInfo {
-    if ([transportInfo.currentTransportState isEqualToString:LXUPnPTransportInfo_Status_Playing] || [transportInfo.currentTransportState isEqualToString:LXUPnPTransportInfo_Status_Transitioning]) {
-        [_control play];
+    if ([transportInfo.currentTransportState isEqualToString:LXUPnPTransportInfo_Status_Transitioning]) {
+        NSLog(@"连接中");
+    } else if ([transportInfo.currentTransportState isEqualToString:LXUPnPTransportInfo_Status_Playing]) {
+        NSLog(@"正在播放");
+    } else if ([transportInfo.currentTransportState isEqualToString:LXUPnPTransportInfo_Status_Stopped]) {
+        NSLog(@"播放已停止");
+    } else if ([transportInfo.currentTransportState isEqualToString:LXUPnPTransportInfo_Status_Paused]) {
+        NSLog(@"播放已暂停");
+    } else {
+        NSLog(@"其他状态：%@", transportInfo.currentTransportState);
     }
 }
 
 - (void)lx_getPositionInfoResponse:(LXUPnPAVPositionInfo *)info {
-    _currentTime = info.trackDuration;
+    _currentTime = info.relTime;
+}
+
+- (void)lx_getVolumeResponse:(NSString *)volume {
+    NSLog(@"音量：%@", volume);
 }
 
 - (void)lx_undefinedResponse:(NSString *)responseXML {
@@ -62,28 +74,32 @@
 
 - (IBAction)stop:(id)sender {
     [_control stop];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)downVolume:(id)sender {
     [_control setVolumeIncre:-1];
+//    [_control setVolume:2];
 }
 
 - (IBAction)upVolume:(id)sender {
     [_control setVolumeIncre:1];
+//    [_control setVolume:100];
 }
 
 - (IBAction)seekGo:(id)sender {
-    [_control seekToTime:_currentTime + 20];
+    [_control seekToTime:_currentTime + 10];
 }
 
 - (IBAction)seekBack:(id)sender {
-    [_control seekToTime:_currentTime - 20];
+    [_control seekToTime:_currentTime - 10];
 }
 
 - (IBAction)previous:(id)sender {
 }
 
 - (IBAction)next:(id)sender {
+    [_control getVolume];
 }
 
 - (IBAction)switch:(id)sender {

@@ -86,15 +86,13 @@ static NSString *LXControlDevice_Unit_TRACK_NR = @"TRACK_NR";
 /// 获取播放进度，进度通过Delegate返回
 - (void)getPositionInfo;
 
-/// 获取播放进度的定时器，每秒轮询一次，进度通过Delegate返回
-- (void)startGetPositionInfoTimer;
-/// 关闭播放进度的定时器
-- (void)stopGetPositionInfoTimer;
-
 @end
 
 static NSString *LXUPnPTransportInfo_Status_Playing = @"PLAYING";
 static NSString *LXUPnPTransportInfo_Status_Transitioning = @"TRANSITIONING";
+static NSString *LXUPnPTransportInfo_Status_Stopped = @"STOPPED";
+static NSString *LXUPnPTransportInfo_Status_Paused = @"PAUSED_PLAYBACK";
+static NSString *LXUPnPTransportInfo_Status_NoMediaPresent = @"NO_MEDIA_PRESENT";
 
 /// 播放状态信息
 @interface LXUPnPTransportInfo : NSObject

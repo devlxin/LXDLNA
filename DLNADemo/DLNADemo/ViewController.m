@@ -27,10 +27,11 @@
 }
 
 - (void)airPlay {
-    MPVolumeView *volume = [[MPVolumeView alloc] initWithFrame:CGRectMake(100, 100, 50, 50)];
-    volume.showsVolumeSlider = NO;
-    [volume sizeToFit];
-    [self.view addSubview:volume];
+    NSLog(@"未完成");
+//    MPVolumeView *volume = [[MPVolumeView alloc] initWithFrame:CGRectMake(100, 100, 50, 50)];
+//    volume.showsVolumeSlider = NO;
+//    [volume sizeToFit];
+//    [self.view addSubview:volume];
 }
 
 - (IBAction)findDevice:(id)sender {

@@ -41,7 +41,6 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
 
 @interface LXControlDevice() {
     void (^_getVolumeCompleteBlock)(int volume);
-    NSTimer *_timer;
 }
 
 @property (nonatomic, assign) LXControlDeviceDelegateFlags delegateFlags;
@@ -164,6 +163,20 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
     [self _postAction:LXControlDevice_Action_Seek body:XMLElement serviceType:LXUPnPDevice_ServiceType_AVTransport];
 }
 
+- (void)getTransportInfo {
+    NSString *name = [NSString stringWithFormat:@"u:%@", LXControlDevice_Action_GetTransportInfo];
+    GDataXMLElement *XMLElement = [GDataXMLElement elementWithName:name];
+    [XMLElement addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
+    [self _postAction:LXControlDevice_Action_GetTransportInfo body:XMLElement serviceType:LXUPnPDevice_ServiceType_AVTransport];
+}
+
+- (void)getPositionInfo {
+    NSString *name = [NSString stringWithFormat:@"u:%@", LXControlDevice_Action_GetPositionInfo];
+    GDataXMLElement *XMLElement = [GDataXMLElement elementWithName:name];
+    [XMLElement addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
+    [self _postAction:LXControlDevice_Action_GetPositionInfo body:XMLElement serviceType:LXUPnPDevice_ServiceType_AVTransport];
+}
+
 #pragma mark RenderingControl
 - (void)setVolume:(int)volume {
     if (volume < 0) volume = 0;
@@ -195,34 +208,6 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
     [XMLElement addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
     [XMLElement addChild:[GDataXMLElement elementWithName:@"Channel" stringValue:@"Master"]];
     [self _postAction:LXControlDevice_Action_GetVolume body:XMLElement serviceType:LXUPnPDevice_ServiceType_RenderingControl];
-}
-
-- (void)getTransportInfo {
-    NSString *name = [NSString stringWithFormat:@"u:%@", LXControlDevice_Action_GetTransportInfo];
-    GDataXMLElement *XMLElement = [GDataXMLElement elementWithName:name];
-    [XMLElement addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
-    [self _postAction:LXControlDevice_Action_GetTransportInfo body:XMLElement serviceType:LXUPnPDevice_ServiceType_RenderingControl];
-}
-
-- (void)getPositionInfo {
-    NSString *name = [NSString stringWithFormat:@"u:%@", LXControlDevice_Action_GetPositionInfo];
-    GDataXMLElement *XMLElement = [GDataXMLElement elementWithName:name];
-    [XMLElement addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
-    [self _postAction:LXControlDevice_Action_GetPositionInfo body:XMLElement serviceType:LXUPnPDevice_ServiceType_RenderingControl];
-}
-
-#pragma mark - timer
-- (void)startGetPositionInfoTimer {
-    [self stopGetPositionInfoTimer];
-    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(getPositionInfo) userInfo:nil repeats:YES];
-    [_timer fire];
-}
-
-- (void)stopGetPositionInfoTimer {
-    if (_timer) {
-        [_timer invalidate];
-        _timer = nil;
-    }
 }
 
 #pragma mark - post response
@@ -322,6 +307,8 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
     NSString *postXMLString = [self _getPostXMLString:xmlBody serviceType:serviceType]; if (LXDLNA_kStringIsEmpty(postXMLString)) return;
     NSString *SOAPAction = [self _getSOAPAction:action serviceType:serviceType]; if (LXDLNA_kStringIsEmpty(SOAPAction)) return;
     
+    NSLog(@"请求：%@", postXMLString);
+    
     NSURL *URL = [NSURL URLWithString:url];
     NSURLSession *session = [NSURLSession sharedSession];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
@@ -336,6 +323,7 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
             }
             return;
         } else {
+            NSLog(@"响应：%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             [self _postResponse:data];
         }
     }];
@@ -385,11 +373,6 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
             (int)(timeValue / 3600.0),
             (int)(fmod(timeValue, 3600.0) / 60.0),
             (int)fmod(timeValue, 60.0)];
-}
-
-#pragma mark - life cycle
-- (void)dealloc {
-    [self stopGetPositionInfoTimer];
 }
 
 @end
