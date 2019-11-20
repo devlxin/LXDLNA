@@ -1,0 +1,11 @@
+source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+workspace 'DLNADemo'
+
+target 'DLNADemo' do
+
+pod 'CocoaAsyncSocket', '~> 7.6.3'
+
+end

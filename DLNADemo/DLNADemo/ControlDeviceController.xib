@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ControlDeviceController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jf1-u1-JGt">
+                    <rect key="frame" x="291.5" y="233" width="31" height="30"/>
+                    <state key="normal" title="停止"/>
+                    <connections>
+                        <action selector="stop:" destination="-1" eventType="touchUpInside" id="24b-aU-ggk"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FY1-yw-ZUq">
+                    <rect key="frame" x="176" y="363" width="62" height="30"/>
+                    <state key="normal" title="降低音量"/>
+                    <connections>
+                        <action selector="downVolume:" destination="-1" eventType="touchUpInside" id="a2A-qO-Og5"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bMe-pl-ALO">
+                    <rect key="frame" x="176" y="513" width="62" height="30"/>
+                    <state key="normal" title="提高音量"/>
+                    <connections>
+                        <action selector="upVolume:" destination="-1" eventType="touchUpInside" id="IQF-jA-Qgf"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1F-4f-VEu">
+                    <rect key="frame" x="108" y="438" width="48" height="30"/>
+                    <state key="normal" title="后退5s"/>
+                    <connections>
+                        <action selector="seekBack:" destination="-1" eventType="touchUpInside" id="9Kf-4U-Tbc"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSU-b3-XMQ">
+                    <rect key="frame" x="258" y="438" width="48" height="30"/>
+                    <state key="normal" title="前进5s"/>
+                    <connections>
+                        <action selector="seekGo:" destination="-1" eventType="touchUpInside" id="jCW-Zr-igc"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iYi-P1-UwS">
+                    <rect key="frame" x="191.5" y="233" width="31" height="30"/>
+                    <state key="normal" title="暂停"/>
+                    <connections>
+                        <action selector="pause:" destination="-1" eventType="touchUpInside" id="u6H-QT-gfq"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Hh-Eb-vkE">
+                    <rect key="frame" x="184" y="643" width="46" height="30"/>
+                    <state key="normal" title="下一条"/>
+                    <connections>
+                        <action selector="next:" destination="-1" eventType="touchUpInside" id="7im-bc-b1e"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KjP-WT-XpQ">
+                    <rect key="frame" x="84" y="643" width="46" height="30"/>
+                    <state key="normal" title="上一条"/>
+                    <connections>
+                        <action selector="previous:" destination="-1" eventType="touchUpInside" id="TJ8-G5-ePQ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MfT-md-GgE">
+                    <rect key="frame" x="291.5" y="643" width="31" height="30"/>
+                    <state key="normal" title="换集"/>
+                    <connections>
+                        <action selector="switch:" destination="-1" eventType="touchUpInside" id="VLd-6D-RpX"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgR-vu-pPL">
+                    <rect key="frame" x="91.5" y="233" width="31" height="30"/>
+                    <state key="normal" title="播放"/>
+                    <connections>
+                        <action selector="play:" destination="-1" eventType="touchUpInside" id="zPT-p8-5nO"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="FY1-yw-ZUq" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" constant="-75" id="0vS-b2-l8f"/>
+                <constraint firstItem="m1F-4f-VEu" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" constant="-75" id="1qF-UU-1A0"/>
+                <constraint firstItem="VSU-b3-XMQ" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="6Dk-3I-Dy1"/>
+                <constraint firstItem="KjP-WT-XpQ" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" constant="-100" id="7FO-EY-OGx"/>
+                <constraint firstItem="Jf1-u1-JGt" firstAttribute="top" secondItem="iYi-P1-UwS" secondAttribute="top" id="8sX-LZ-Ja6"/>
+                <constraint firstItem="bMe-pl-ALO" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="AQF-i3-bi9"/>
+                <constraint firstItem="7Hh-Eb-vkE" firstAttribute="top" secondItem="bMe-pl-ALO" secondAttribute="bottom" constant="100" id="F1D-Ro-xDb"/>
+                <constraint firstItem="VSU-b3-XMQ" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" constant="75" id="Lz1-rF-c2V"/>
+                <constraint firstItem="kgR-vu-pPL" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" constant="-100" id="NJL-ue-Z0m"/>
+                <constraint firstItem="Jf1-u1-JGt" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" constant="100" id="Qkw-Pu-ZJm"/>
+                <constraint firstItem="KjP-WT-XpQ" firstAttribute="top" secondItem="7Hh-Eb-vkE" secondAttribute="top" id="ZF2-Vj-9SN"/>
+                <constraint firstItem="7Hh-Eb-vkE" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="a2m-Nb-goD"/>
+                <constraint firstItem="m1F-4f-VEu" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="cPB-WD-rOZ"/>
+                <constraint firstItem="bMe-pl-ALO" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" constant="75" id="dJn-tu-vWK"/>
+                <constraint firstItem="MfT-md-GgE" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" constant="100" id="iwP-FB-BYV"/>
+                <constraint firstItem="iYi-P1-UwS" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="qBt-aJ-UxW"/>
+                <constraint firstItem="MfT-md-GgE" firstAttribute="top" secondItem="7Hh-Eb-vkE" secondAttribute="top" id="rHI-Cm-ufC"/>
+                <constraint firstItem="FY1-yw-ZUq" firstAttribute="top" secondItem="iYi-P1-UwS" secondAttribute="bottom" constant="100" id="v53-df-mrO"/>
+                <constraint firstItem="FY1-yw-ZUq" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="yMu-Vd-OEq"/>
+                <constraint firstItem="kgR-vu-pPL" firstAttribute="top" secondItem="iYi-P1-UwS" secondAttribute="top" id="yg7-HK-i9O"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="53.623188405797109" y="39.508928571428569"/>
+        </view>
+    </objects>
+</document>

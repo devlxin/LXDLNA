@@ -1,0 +1,490 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4F1DADAF2383B454003F2E4C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1DADAE2383B454003F2E4C /* AppDelegate.m */; };
+		4F1DADB22383B454003F2E4C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1DADB12383B454003F2E4C /* SceneDelegate.m */; };
+		4F1DADB52383B454003F2E4C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1DADB42383B454003F2E4C /* ViewController.m */; };
+		4F1DADB82383B454003F2E4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F1DADB62383B454003F2E4C /* Main.storyboard */; };
+		4F1DADBA2383B455003F2E4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F1DADB92383B455003F2E4C /* Assets.xcassets */; };
+		4F1DADBD2383B455003F2E4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F1DADBB2383B455003F2E4C /* LaunchScreen.storyboard */; };
+		4F1DADC02383B455003F2E4C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1DADBF2383B455003F2E4C /* main.m */; };
+		4F1DADC92383B551003F2E4C /* LXFindDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1DADC82383B551003F2E4C /* LXFindDevice.m */; };
+		4F1DADCC2383B570003F2E4C /* LXControlDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1DADCB2383B570003F2E4C /* LXControlDevice.m */; };
+		4F1DADCF2383D41F003F2E4C /* LXUPnPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1DADCE2383D41F003F2E4C /* LXUPnPDevice.m */; };
+		4F1DADD42383DFF7003F2E4C /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1DADD32383DFF7003F2E4C /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4F1DADD92383E090003F2E4C /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1DADD52383E023003F2E4C /* libxml2.2.tbd */; };
+		4F1DADDC2383F201003F2E4C /* FindDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1DADDB2383F201003F2E4C /* FindDeviceController.m */; };
+		4F1DADEB2384459C003F2E4C /* ControlDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1DADE92384459C003F2E4C /* ControlDeviceController.m */; };
+		4F1DADEC2384459C003F2E4C /* ControlDeviceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1DADEA2384459C003F2E4C /* ControlDeviceController.xib */; };
+		92D1A8D47A015FB0CA4A3A3C /* Pods_DLNADemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E7AF35BC0D24438C46B6F3A /* Pods_DLNADemo.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4F1DADAA2383B454003F2E4C /* DLNADemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DLNADemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F1DADAD2383B454003F2E4C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		4F1DADAE2383B454003F2E4C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4F1DADB02383B454003F2E4C /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		4F1DADB12383B454003F2E4C /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		4F1DADB32383B454003F2E4C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		4F1DADB42383B454003F2E4C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		4F1DADB72383B454003F2E4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4F1DADB92383B455003F2E4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4F1DADBC2383B455003F2E4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4F1DADBE2383B455003F2E4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F1DADBF2383B455003F2E4C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4F1DADC72383B551003F2E4C /* LXFindDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXFindDevice.h; sourceTree = "<group>"; };
+		4F1DADC82383B551003F2E4C /* LXFindDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXFindDevice.m; sourceTree = "<group>"; };
+		4F1DADCA2383B570003F2E4C /* LXControlDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXControlDevice.h; sourceTree = "<group>"; };
+		4F1DADCB2383B570003F2E4C /* LXControlDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXControlDevice.m; sourceTree = "<group>"; };
+		4F1DADCE2383D41F003F2E4C /* LXUPnPDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXUPnPDevice.m; sourceTree = "<group>"; };
+		4F1DADD02383D793003F2E4C /* LXUPnPDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXUPnPDevice.h; sourceTree = "<group>"; };
+		4F1DADD22383DFF7003F2E4C /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		4F1DADD32383DFF7003F2E4C /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		4F1DADD52383E023003F2E4C /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		4F1DADD72383E05B003F2E4C /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		4F1DADDA2383F201003F2E4C /* FindDeviceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindDeviceController.h; sourceTree = "<group>"; };
+		4F1DADDB2383F201003F2E4C /* FindDeviceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindDeviceController.m; sourceTree = "<group>"; };
+		4F1DADE82384459C003F2E4C /* ControlDeviceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlDeviceController.h; sourceTree = "<group>"; };
+		4F1DADE92384459C003F2E4C /* ControlDeviceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControlDeviceController.m; sourceTree = "<group>"; };
+		4F1DADEA2384459C003F2E4C /* ControlDeviceController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ControlDeviceController.xib; sourceTree = "<group>"; };
+		4F1DADED2384E3DB003F2E4C /* LXDLNA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXDLNA.h; sourceTree = "<group>"; };
+		7E7AF35BC0D24438C46B6F3A /* Pods_DLNADemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DLNADemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9020E6AE4E026F9B43FCD194 /* Pods-DLNADemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DLNADemo.debug.xcconfig"; path = "Target Support Files/Pods-DLNADemo/Pods-DLNADemo.debug.xcconfig"; sourceTree = "<group>"; };
+		EB63EE1404D08B01B4BFA12D /* Pods-DLNADemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DLNADemo.release.xcconfig"; path = "Target Support Files/Pods-DLNADemo/Pods-DLNADemo.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4F1DADA72383B454003F2E4C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92D1A8D47A015FB0CA4A3A3C /* Pods_DLNADemo.framework in Frameworks */,
+				4F1DADD92383E090003F2E4C /* libxml2.2.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4F1DADA12383B454003F2E4C = {
+			isa = PBXGroup;
+			children = (
+				4F1DADC62383B45C003F2E4C /* LXDLNA */,
+				4F1DADAC2383B454003F2E4C /* DLNADemo */,
+				4F1DADAB2383B454003F2E4C /* Products */,
+				D38AC1D1C132C47E361A7281 /* Pods */,
+				C98EA89D0E5E0E0600912BC1 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4F1DADAB2383B454003F2E4C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4F1DADAA2383B454003F2E4C /* DLNADemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4F1DADAC2383B454003F2E4C /* DLNADemo */ = {
+			isa = PBXGroup;
+			children = (
+				4F1DADAD2383B454003F2E4C /* AppDelegate.h */,
+				4F1DADAE2383B454003F2E4C /* AppDelegate.m */,
+				4F1DADB02383B454003F2E4C /* SceneDelegate.h */,
+				4F1DADB12383B454003F2E4C /* SceneDelegate.m */,
+				4F1DADB32383B454003F2E4C /* ViewController.h */,
+				4F1DADB42383B454003F2E4C /* ViewController.m */,
+				4F1DADB62383B454003F2E4C /* Main.storyboard */,
+				4F1DADB92383B455003F2E4C /* Assets.xcassets */,
+				4F1DADBB2383B455003F2E4C /* LaunchScreen.storyboard */,
+				4F1DADBE2383B455003F2E4C /* Info.plist */,
+				4F1DADBF2383B455003F2E4C /* main.m */,
+				4F1DADDA2383F201003F2E4C /* FindDeviceController.h */,
+				4F1DADDB2383F201003F2E4C /* FindDeviceController.m */,
+				4F1DADE82384459C003F2E4C /* ControlDeviceController.h */,
+				4F1DADE92384459C003F2E4C /* ControlDeviceController.m */,
+				4F1DADEA2384459C003F2E4C /* ControlDeviceController.xib */,
+			);
+			path = DLNADemo;
+			sourceTree = "<group>";
+		};
+		4F1DADC62383B45C003F2E4C /* LXDLNA */ = {
+			isa = PBXGroup;
+			children = (
+				4F1DADD12383DFE1003F2E4C /* GDataXML */,
+				4F1DADD02383D793003F2E4C /* LXUPnPDevice.h */,
+				4F1DADCE2383D41F003F2E4C /* LXUPnPDevice.m */,
+				4F1DADC72383B551003F2E4C /* LXFindDevice.h */,
+				4F1DADC82383B551003F2E4C /* LXFindDevice.m */,
+				4F1DADCA2383B570003F2E4C /* LXControlDevice.h */,
+				4F1DADCB2383B570003F2E4C /* LXControlDevice.m */,
+				4F1DADED2384E3DB003F2E4C /* LXDLNA.h */,
+			);
+			path = LXDLNA;
+			sourceTree = "<group>";
+		};
+		4F1DADD12383DFE1003F2E4C /* GDataXML */ = {
+			isa = PBXGroup;
+			children = (
+				4F1DADD22383DFF7003F2E4C /* GDataXMLNode.h */,
+				4F1DADD32383DFF7003F2E4C /* GDataXMLNode.m */,
+			);
+			path = GDataXML;
+			sourceTree = "<group>";
+		};
+		C98EA89D0E5E0E0600912BC1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4F1DADD72383E05B003F2E4C /* libxml2.tbd */,
+				4F1DADD52383E023003F2E4C /* libxml2.2.tbd */,
+				7E7AF35BC0D24438C46B6F3A /* Pods_DLNADemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D38AC1D1C132C47E361A7281 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9020E6AE4E026F9B43FCD194 /* Pods-DLNADemo.debug.xcconfig */,
+				EB63EE1404D08B01B4BFA12D /* Pods-DLNADemo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4F1DADA92383B454003F2E4C /* DLNADemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F1DADC32383B455003F2E4C /* Build configuration list for PBXNativeTarget "DLNADemo" */;
+			buildPhases = (
+				6F19BB65B90EE0AB4F11253E /* [CP] Check Pods Manifest.lock */,
+				4F1DADA62383B454003F2E4C /* Sources */,
+				4F1DADA72383B454003F2E4C /* Frameworks */,
+				4F1DADA82383B454003F2E4C /* Resources */,
+				756B710AEE9992C852AB067B /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DLNADemo;
+			productName = DLNADemo;
+			productReference = 4F1DADAA2383B454003F2E4C /* DLNADemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4F1DADA22383B454003F2E4C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = "李鑫";
+				TargetAttributes = {
+					4F1DADA92383B454003F2E4C = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 4F1DADA52383B454003F2E4C /* Build configuration list for PBXProject "DLNADemo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4F1DADA12383B454003F2E4C;
+			productRefGroup = 4F1DADAB2383B454003F2E4C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4F1DADA92383B454003F2E4C /* DLNADemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4F1DADA82383B454003F2E4C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F1DADBD2383B455003F2E4C /* LaunchScreen.storyboard in Resources */,
+				4F1DADEC2384459C003F2E4C /* ControlDeviceController.xib in Resources */,
+				4F1DADBA2383B455003F2E4C /* Assets.xcassets in Resources */,
+				4F1DADB82383B454003F2E4C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6F19BB65B90EE0AB4F11253E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DLNADemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		756B710AEE9992C852AB067B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DLNADemo/Pods-DLNADemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DLNADemo/Pods-DLNADemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DLNADemo/Pods-DLNADemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4F1DADA62383B454003F2E4C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F1DADDC2383F201003F2E4C /* FindDeviceController.m in Sources */,
+				4F1DADB52383B454003F2E4C /* ViewController.m in Sources */,
+				4F1DADD42383DFF7003F2E4C /* GDataXMLNode.m in Sources */,
+				4F1DADEB2384459C003F2E4C /* ControlDeviceController.m in Sources */,
+				4F1DADAF2383B454003F2E4C /* AppDelegate.m in Sources */,
+				4F1DADC92383B551003F2E4C /* LXFindDevice.m in Sources */,
+				4F1DADC02383B455003F2E4C /* main.m in Sources */,
+				4F1DADB22383B454003F2E4C /* SceneDelegate.m in Sources */,
+				4F1DADCC2383B570003F2E4C /* LXControlDevice.m in Sources */,
+				4F1DADCF2383D41F003F2E4C /* LXUPnPDevice.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4F1DADB62383B454003F2E4C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4F1DADB72383B454003F2E4C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4F1DADBB2383B455003F2E4C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4F1DADBC2383B455003F2E4C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4F1DADC12383B455003F2E4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		4F1DADC22383B455003F2E4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4F1DADC42383B455003F2E4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9020E6AE4E026F9B43FCD194 /* Pods-DLNADemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X8CV78P2KB;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework/Headers\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
+				INFOPLIST_FILE = DLNADemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.devlxin.DLNADemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4F1DADC52383B455003F2E4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB63EE1404D08B01B4BFA12D /* Pods-DLNADemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X8CV78P2KB;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework/Headers\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
+				INFOPLIST_FILE = DLNADemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.devlxin.DLNADemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4F1DADA52383B454003F2E4C /* Build configuration list for PBXProject "DLNADemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F1DADC12383B455003F2E4C /* Debug */,
+				4F1DADC22383B455003F2E4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4F1DADC32383B455003F2E4C /* Build configuration list for PBXNativeTarget "DLNADemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F1DADC42383B455003F2E4C /* Debug */,
+				4F1DADC52383B455003F2E4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4F1DADA22383B454003F2E4C /* Project object */;
+}
