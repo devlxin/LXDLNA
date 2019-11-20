@@ -11,7 +11,6 @@
 
 @interface ControlDeviceController () <LXControlDeviceDelegate> {
     LXControlDevice *_control;
-    int _currentVolume;
     float _currentTime;
 }
 
@@ -40,10 +39,6 @@
     }
 }
 
-- (void)lx_getVolumeResponse:(NSString *)volume {
-    _currentVolume = volume.intValue;
-}
-
 - (void)lx_getPositionInfoResponse:(LXUPnPAVPositionInfo *)info {
     _currentTime = info.trackDuration;
 }
@@ -70,11 +65,11 @@
 }
 
 - (IBAction)downVolume:(id)sender {
-    [_control setVolume:_currentVolume - 1];
+    [_control setVolumeIncre:-1];
 }
 
 - (IBAction)upVolume:(id)sender {
-    [_control setVolume:_currentVolume + 1];
+    [_control setVolumeIncre:1];
 }
 
 - (IBAction)seekGo:(id)sender {
