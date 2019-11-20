@@ -88,11 +88,13 @@
 }
 
 - (IBAction)seekGo:(id)sender {
-    [_control seekToTime:_currentTime + 10];
+//    [_control seekToTime:_currentTime + 10];
+    [_control seekToTimeIncre:10];
 }
 
 - (IBAction)seekBack:(id)sender {
-    [_control seekToTime:_currentTime - 10];
+//    [_control seekToTime:_currentTime - 10];
+    [_control seekToTimeIncre:-10];
 }
 
 - (IBAction)previous:(id)sender {

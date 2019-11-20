@@ -41,6 +41,7 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
 
 @interface LXControlDevice() {
     void (^_getVolumeCompleteBlock)(int volume);
+    void (^_getPositionInfoCompleteBlock)(LXUPnPAVPositionInfo *info);
 }
 
 @property (nonatomic, assign) LXControlDeviceDelegateFlags delegateFlags;
@@ -152,6 +153,13 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
     [self seekToTartget:[self _getDurationTime:time] unit:LXControlDevice_Unit_REL_TIME];
 }
 
+- (void)seekToTimeIncre:(float)increTime {
+    __weak typeof(self) weakSelf = self;
+    [self getPositionInfo:^(LXUPnPAVPositionInfo *info) {
+        [weakSelf seekToTime:info.relTime + increTime];
+    }];
+}
+
 - (void)seekToTartget:(NSString *)target unit:(NSString *)unit {
     if (![LXControlDevice_Unit_REL_TIME isEqualToString:unit] && ![LXControlDevice_Unit_TRACK_NR isEqualToString:unit]) return;
     
@@ -171,11 +179,18 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
 }
 
 - (void)getPositionInfo {
+    [self getPositionInfo:nil];
+}
+
+- (void)getPositionInfo:(void (^)(LXUPnPAVPositionInfo *info))complete {
+    if (complete) _getPositionInfoCompleteBlock = complete;
+    
     NSString *name = [NSString stringWithFormat:@"u:%@", LXControlDevice_Action_GetPositionInfo];
     GDataXMLElement *XMLElement = [GDataXMLElement elementWithName:name];
     [XMLElement addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
     [self _postAction:LXControlDevice_Action_GetPositionInfo body:XMLElement serviceType:LXUPnPDevice_ServiceType_AVTransport];
 }
+
 
 #pragma mark RenderingControl
 - (void)setVolume:(int)volume {
@@ -280,6 +295,11 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
                         LXUPnPAVPositionInfo *info = [[LXUPnPAVPositionInfo alloc] init];
                         [info setArray:[ele children]];
                         [self.delegate lx_getPositionInfoResponse:info];
+                    }
+                    if (_getPositionInfoCompleteBlock) {
+                        LXUPnPAVPositionInfo *info = [[LXUPnPAVPositionInfo alloc] init];
+                        [info setArray:[ele children]];
+                        _getPositionInfoCompleteBlock(info);
                     }
                 } else if ([[ele name] hasSuffix:@"GetTransportInfoResponse"]) {
                     if (self.delegateFlags.isExistGetTransportInfoResponseDelegate) {

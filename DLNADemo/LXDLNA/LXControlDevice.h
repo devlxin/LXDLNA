@@ -67,6 +67,9 @@ static NSString *LXControlDevice_Unit_TRACK_NR = @"TRACK_NR";
 /// 跳转到特定进度
 /// @param time  时间进度(秒)
 - (void)seekToTime:(float)time;
+/// 跳转增量
+/// @param increTime  时间增量(秒)，例如：-5，5
+- (void)seekToTimeIncre:(float)increTime;
 /// 跳转至特定进度或视频
 /// @param target  目标值，可以是 00:02:21 格式的进度或者整数的 TRACK_NR
 /// @param unit  REL_TIME（跳转到某个进度）或 TRACK_NR（跳转到某个视频）
