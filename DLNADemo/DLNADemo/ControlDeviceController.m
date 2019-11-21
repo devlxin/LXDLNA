@@ -41,6 +41,7 @@
 }
 
 - (void)lx_getPositionInfoResponse:(LXUPnPAVPositionInfo *)info {
+    [_subscribe sendSubcirbeWithTime:info.trackDuration serviceType:LXUPnPDevice_ServiceType_AVTransport];
     [_subscribe sendSubcirbeWithTime:info.trackDuration serviceType:LXUPnPDevice_ServiceType_RenderingControl];
 }
 
