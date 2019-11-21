@@ -282,7 +282,6 @@ typedef struct {
 #pragma mark - life cycle
 - (void)dealloc {
     [self _stopWebServer];
-    NSLog(@"LXSubscribeDevice已经释放");
 }
 
 @end
