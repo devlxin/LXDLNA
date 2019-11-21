@@ -48,12 +48,18 @@ typedef struct {
 }
 
 - (void)sendSubcirbeWithTime:(int)time serviceType:(NSString *)serviceType {
+    if (_webServer.isRunning && [self.sidDict.allKeys containsObject:serviceType]) {
+        return;
+    }
+    
+    if (time <= 0) time = 3600;
+    
     NSString *callbackUrlStr = [self _startWebServer];
     [self _post:callbackUrlStr time:time serviceType:serviceType];
 }
 
 - (void)contractSubscirbeWithTime:(int)time serviceType:(NSString *)serviceType {
-    if (LXDLNA_kStringIsEmpty([self.sidDict valueForKey:serviceType])) return;
+    if (![self.sidDict.allKeys containsObject:serviceType]) return;
     
     NSString *serverUrlStr = self.webServer.serverURL.absoluteString;
     NSString *callbackUrlStr = [NSString stringWithFormat:@"%@dlna/callback", serverUrlStr];
@@ -61,7 +67,7 @@ typedef struct {
 }
 
 - (void)removeSubscirbeWithServiceType:(NSString *)serviceType {
-    if (LXDLNA_kStringIsEmpty([self.sidDict valueForKey:serviceType])) return;
+    if (![self.sidDict.allKeys containsObject:serviceType]) return;
     
     NSString *serverUrlStr = self.webServer.serverURL.absoluteString;
     NSString *callbackUrlStr = [NSString stringWithFormat:@"%@dlna/callback", serverUrlStr];
@@ -70,17 +76,20 @@ typedef struct {
 
 #pragma mark - server callback
 - (NSString *)_startWebServer {
-    if (!self.webServer) {
-        self.webServer = [[GCDWebServer alloc] init];
-    }
+    [self _stopWebServer];
+    
+    self.webServer = [[GCDWebServer alloc] init];
     __weak typeof(self) weakSelf = self;
     [self.webServer addHandlerForMethod:@"NOTIFY" pathRegex:@"dlna/callback" requestClass:[GCDWebServerDataRequest class] processBlock:^GCDWebServerResponse * _Nullable(__kindof GCDWebServerDataRequest * _Nonnull request) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
         if (request.hasBody && request.data) {
-            if ([request isKindOfClass:[GCDWebServerDataRequest class]]) {
-                NSString *string = [[NSString alloc]initWithData:request.data encoding:NSUTF8StringEncoding];
-                string = [self _retransfer:string];
-//                NSLog(@"订阅回调：%@", string);
-                [weakSelf _handleResponse:request.data];
+            if ([request.headers isKindOfClass:[NSDictionary class]]) {
+                NSString *sid = request.headers[@"SID"];
+                if ([strongSelf.sidDict.allValues containsObject:sid]) {
+                    if ([request isKindOfClass:[GCDWebServerDataRequest class]]) {
+                        [strongSelf _handleResponse:request.data];
+                    }
+                }
             }
         }
         GCDWebServerResponse *response = [[GCDWebServerResponse alloc] initWithStatusCode:200];
@@ -119,13 +128,17 @@ typedef struct {
                                         if ([[needElement name] isEqualToString:@"TransportState"]) {
                                             NSString *transportState = [[needElement attributeForName:@"val"] stringValue];
                                             if (self.delegateFlags.isExistSubcirbeTransportStateCallbackDelegate) {
-                                                [self.delegate lx_subcirbeTransportStateCallback:transportState];
+                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                    [self.delegate lx_subcirbeTransportStateCallback:transportState];
+                                                });
                                             }
                                         }
                                         if ([[needElement name] isEqualToString:@"RelativeTimePosition"]) {
                                             NSString *relativeTimePosition =  [[needElement attributeForName:@"val"] stringValue];
                                             if (self.delegateFlags.isExistSubcirbeRelativeTimePositionDelegate) {
-                                                [self.delegate lx_subcirbeRelativeTimePositionCallback:relativeTimePosition];
+                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                    [self.delegate lx_subcirbeRelativeTimePositionCallback:relativeTimePosition];
+                                                });
                                             }
                                             self.isRelativeTimePositionEnabled = YES;
                                         }
@@ -143,6 +156,7 @@ typedef struct {
 - (void)_stopWebServer {
     if (self.webServer) {
         [self.webServer stop];
+        self.webServer = nil;
     }
 }
 
@@ -159,11 +173,11 @@ typedef struct {
     } else {
         request.HTTPMethod = @"UNSUBSCRIBE";
     }
-    if (!LXDLNA_kStringIsEmpty([self.sidDict valueForKey:serviceType])) {
+    if ([self.sidDict.allKeys containsObject:serviceType]) {
         NSString *sid = [self.sidDict valueForKey:serviceType];
         [request addValue:sid forHTTPHeaderField:@"SID"];
     }
-    if (LXDLNA_kStringIsEmpty([self.sidDict valueForKey:serviceType])) {
+    if (![self.sidDict.allKeys containsObject:serviceType]) {
         request.HTTPMethod = @"SUBSCRIBE";
         NSString *version = [UIDevice currentDevice].systemVersion;
         NSString *userAgent = [NSString stringWithFormat:@"iOS/%@ UPnP/1.1 SCDLNA/1.0", version];
@@ -174,36 +188,49 @@ typedef struct {
     
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error || data == nil) {
-            if (!LXDLNA_kStringIsEmpty([self.sidDict valueForKey:serviceType])) {
+            if ([self.sidDict.allKeys containsObject:serviceType]) {
                 if (time <= 0) {
                     if (self.delegate && [self.delegate respondsToSelector:@selector(lx_removeSubscirbeSuccessOrFail:)]) {
-                        [self.delegate lx_removeSubscirbeSuccessOrFail:NO];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_removeSubscirbeSuccessOrFail:NO];
+                        });
                     }
                 } else {
                     if (self.delegate && [self.delegate respondsToSelector:@selector(lx_contractSubscirbeSuccessOrFail:)]) {
-                        [self.delegate lx_contractSubscirbeSuccessOrFail:NO];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_contractSubscirbeSuccessOrFail:NO];
+                        });
                     }
                 }
             } else {
                 if (self.delegate && [self.delegate respondsToSelector:@selector(lx_subcirbeSuccessOrFail:)]) {
-                    [self.delegate lx_subcirbeSuccessOrFail:NO];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.delegate lx_subcirbeSuccessOrFail:NO];
+                    });
                 }
             }
             return;
         } else {
-            if (!LXDLNA_kStringIsEmpty([self.sidDict valueForKey:serviceType])) {
+            if ([self.sidDict.allKeys containsObject:serviceType]) {
                 if (time <= 0) {
                     if (self.delegate && [self.delegate respondsToSelector:@selector(lx_removeSubscirbeSuccessOrFail:)]) {
-                        [self.delegate lx_removeSubscirbeSuccessOrFail:YES];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_removeSubscirbeSuccessOrFail:YES];
+                        });
+                        [self.sidDict removeObjectForKey:serviceType];
                     }
                 } else {
                     if (self.delegate && [self.delegate respondsToSelector:@selector(lx_contractSubscirbeSuccessOrFail:)]) {
-                        [self.delegate lx_contractSubscirbeSuccessOrFail:YES];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_contractSubscirbeSuccessOrFail:YES];
+                        });
                     }
                 }
             } else {
                 if (self.delegate && [self.delegate respondsToSelector:@selector(lx_subcirbeSuccessOrFail:)]) {
-                    [self.delegate lx_subcirbeSuccessOrFail:YES];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.delegate lx_subcirbeSuccessOrFail:YES];
+                    });
                 }
             }
         }
@@ -243,7 +270,8 @@ typedef struct {
 
 #pragma mark - life cycle
 - (void)dealloc {
-    [self _startWebServer];
+    [self _stopWebServer];
+    NSLog(@"LXSubscribeDevice已经释放");
 }
 
 @end

@@ -32,13 +32,16 @@
     
     LXSubscribeDevice *subscribe = [[LXSubscribeDevice alloc] initWithDevice:self.device];
     subscribe.delegate = self;
-    [subscribe sendSubcirbeWithTime:3600 serviceType:LXUPnPDevice_ServiceType_AVTransport];
     _subscribe = subscribe;
 }
 
 #pragma mark - LXControlDeviceDelegate
 - (void)lx_setAVTransportURLReponse {
     [_control play];
+}
+
+- (void)lx_getPositionInfoResponse:(LXUPnPAVPositionInfo *)info {
+    [_subscribe sendSubcirbeWithTime:info.trackDuration serviceType:LXUPnPDevice_ServiceType_AVTransport];
 }
 
 #pragma mark - LXSubscribeDeviceDelegate
@@ -77,6 +80,8 @@
 
 - (IBAction)stop:(id)sender {
     [_control stop];
+    [_subscribe removeSubscirbeWithServiceType:LXUPnPDevice_ServiceType_AVTransport];
+    [_subscribe removeSubscirbeWithServiceType:LXUPnPDevice_ServiceType_RenderingControl];
 }
 
 - (IBAction)downVolume:(id)sender {

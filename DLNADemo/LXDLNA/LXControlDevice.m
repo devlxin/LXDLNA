@@ -249,47 +249,68 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
                 GDataXMLElement *ele = [needArr objectAtIndex:i];
                 if ([[ele name] hasSuffix:@"SetAVTransportURIResponse"]) {
                     if (self.delegateFlags.isExistSetAVTransportURLReponseDelegate) {
-                        [self.delegate lx_setAVTransportURLReponse];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_setAVTransportURLReponse];
+                        });
                     }
                     [self getTransportInfo];
+                    [self getPositionInfo];
                 } else if ([[ele name] hasSuffix:@"SetNextAVTransportURIResponse"]) {
                     if (self.delegateFlags.isExistSetNextAVTransportURLResponseDelegate) {
-                        [self.delegate lx_setNextAVTransportURLResponse];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_setNextAVTransportURLResponse];
+                        });
                     }
                 } else if ([[ele name] hasSuffix:@"PlayResponse"]) {
                     if (self.delegateFlags.isExistPlayResponseDelegate) {
-                        [self.delegate lx_playResponse];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_playResponse];
+                        });
                     }
                 } else if ([[ele name] hasSuffix:@"PauseResponse"]) {
                     if (self.delegateFlags.isExistPauseResponseDelegate) {
-                        [self.delegate lx_pauseResponse];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_pauseResponse];
+                        });
                     }
                 } else if ([[ele name] hasSuffix:@"StopResponse"]){
                     if (self.delegateFlags.isExistStopResponseDelegate) {
-                        [self.delegate lx_stopResponse];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_stopResponse];
+                        });
                     }
                 } else if ([[ele name] hasSuffix:@"SeekResponse"]) {
                     if (self.delegateFlags.isExistSeekResponseDelegate) {
-                        [self.delegate lx_seekResponse];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_seekResponse];
+                        });
                     }
                 } else if ([[ele name] hasSuffix:@"NextResponse"]) {
                     if (self.delegateFlags.isExistNextResponseDelegate) {
-                        [self.delegate lx_nextResponse];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_nextResponse];
+                        });
                     }
                 } else if ([[ele name] hasSuffix:@"PreviousResponse"]) {
                     if (self.delegateFlags.isExistPreviousResponseDelegate) {
-                        [self.delegate lx_previousResponse];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_previousResponse];
+                        });
                     }
                 } else if ([[ele name] hasSuffix:@"SetVolumeResponse"]) {
                     if (self.delegateFlags.isExistSetVolumeResponseDelegate) {
-                        [self.delegate lx_setVolumeResponse];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_setVolumeResponse];
+                        });
                     }
                 } else if ([[ele name] hasSuffix:@"GetVolumeResponse"]) {
                     if (self.delegateFlags.isExistGetVolumeResponseDelegate) {
                         for (int j = 0; j < [ele children].count; j++) {
                             GDataXMLElement *eleXml = [[ele children] objectAtIndex:j];
                             if ([[eleXml name] isEqualToString:@"CurrentVolume"]) {
-                                [self.delegate lx_getVolumeResponse:[eleXml stringValue]];
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self.delegate lx_getVolumeResponse:[eleXml stringValue]];
+                                });
                             }
                         }
                     }
@@ -297,7 +318,9 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
                         for (int j = 0; j < [ele children].count; j++) {
                             GDataXMLElement *eleXml = [[ele children] objectAtIndex:j];
                             if ([[eleXml name] isEqualToString:@"CurrentVolume"]) {
-                                _getVolumeCompleteBlock([eleXml stringValue].intValue);
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    self->_getVolumeCompleteBlock([eleXml stringValue].intValue);
+                                });
                             }
                         }
                     }
@@ -305,28 +328,38 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
                     if (self.delegateFlags.isExistGetPositionInfoResponseDelegate) {
                         LXUPnPAVPositionInfo *info = [[LXUPnPAVPositionInfo alloc] init];
                         [info setArray:[ele children]];
-                        [self.delegate lx_getPositionInfoResponse:info];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_getPositionInfoResponse:info];
+                        });
                     }
                     if (_getPositionInfoCompleteBlock) {
                         LXUPnPAVPositionInfo *info = [[LXUPnPAVPositionInfo alloc] init];
                         [info setArray:[ele children]];
-                        _getPositionInfoCompleteBlock(info);
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            self->_getPositionInfoCompleteBlock(info);
+                        });
                     }
                 } else if ([[ele name] hasSuffix:@"GetTransportInfoResponse"]) {
                     if (self.delegateFlags.isExistGetTransportInfoResponseDelegate) {
                         LXUPnPTransportInfo *info = [[LXUPnPTransportInfo alloc] init];
                         [info setArray:[ele children]];
-                        [self.delegate lx_getTransportInfoResponse:info];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_getTransportInfoResponse:info];
+                        });
                     }
                 } else {
                     if (self.delegateFlags.isExistUndefinedResponseDelegate) {
-                        [self.delegate lx_undefinedResponse:[ele XMLString]];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate lx_undefinedResponse:[ele XMLString]];
+                        });
                     }
                 }
             }
         } else {
             if (self.delegateFlags.isExistUndefinedResponseDelegate) {
-                [self.delegate lx_undefinedResponse:[xmlEle XMLString]];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate lx_undefinedResponse:[xmlEle XMLString]];
+                });
             }
         }
     }
@@ -348,7 +381,9 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error || data == nil) {
             if (self.delegateFlags.isExistUndefinedResponseDelegate) {
-                [self.delegate lx_undefinedResponse:error.localizedDescription];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate lx_undefinedResponse:error.localizedDescription];
+                });
             }
             return;
         } else {
