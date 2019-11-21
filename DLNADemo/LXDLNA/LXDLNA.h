@@ -12,5 +12,6 @@
 #import "LXUPnPDevice.h"
 #import "LXFindDevice.h"
 #import "LXControlDevice.h"
+#import "LXSubscribeDevice.h"
 
 #endif /* LXDLNA_h */

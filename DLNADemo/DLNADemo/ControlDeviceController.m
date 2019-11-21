@@ -8,10 +8,13 @@
 
 #import "ControlDeviceController.h"
 #import "LXControlDevice.h"
+#import "LXSubscribeDevice.h"
+#import "LXUPnPStatusInfo.h"
 
-@interface ControlDeviceController () <LXControlDeviceDelegate> {
+@interface ControlDeviceController () <LXControlDeviceDelegate, LXSubscribeDeviceDelegate> {
     LXControlDevice *_control;
     float _currentTime;
+    LXSubscribeDevice *_subscribe;
 }
 
 @end
@@ -26,6 +29,11 @@
     control.delegate = self;
     [control setAVTransportURL:self.url];
     _control = control;
+    
+    LXSubscribeDevice *subscribe = [[LXSubscribeDevice alloc] initWithDevice:self.device];
+    subscribe.delegate = self;
+    [subscribe sendSubcirbeWithTime:3600 serviceType:LXUPnPDevice_ServiceType_AVTransport];
+    _subscribe = subscribe;
 }
 
 #pragma mark - LXControlDeviceDelegate
@@ -33,34 +41,29 @@
     [_control play];
 }
 
-- (void)lx_getTransportInfoResponse:(LXUPnPTransportInfo *)transportInfo {
-    if ([transportInfo.currentTransportState isEqualToString:LXUPnPTransportInfo_Status_Transitioning]) {
-        NSLog(@"连接中");
-    } else if ([transportInfo.currentTransportState isEqualToString:LXUPnPTransportInfo_Status_Playing]) {
-        NSLog(@"正在播放");
-    } else if ([transportInfo.currentTransportState isEqualToString:LXUPnPTransportInfo_Status_Stopped]) {
-        NSLog(@"播放已停止");
-    } else if ([transportInfo.currentTransportState isEqualToString:LXUPnPTransportInfo_Status_Paused]) {
-        NSLog(@"播放已暂停");
+#pragma mark - LXSubscribeDeviceDelegate
+- (void)lx_subcirbeTransportStateCallback:(NSString *)transportState {
+    NSLog(@"订阅视频状态:---- %@", transportState);
+}
+
+- (void)lx_subcirbeRelativeTimePositionCallback:(NSString *)relativeTimePosition {
+    NSLog(@"订阅进度状态:--- %@", relativeTimePosition);
+}
+
+- (void)lx_contractSubscirbeSuccessOrFail:(BOOL)succesOrFail {
+    if (succesOrFail) {
+        NSLog(@"续订成功！！！！");
     } else {
-        NSLog(@"其他状态：%@", transportInfo.currentTransportState);
+        NSLog(@"续订失败~~~~~");
     }
 }
 
-- (void)lx_getPositionInfoResponse:(LXUPnPAVPositionInfo *)info {
-    _currentTime = info.relTime;
-}
-
-- (void)lx_getVolumeResponse:(NSString *)volume {
-    NSLog(@"音量：%@", volume);
-}
-
-- (void)lx_undefinedResponse:(NSString *)responseXML {
-    NSLog(@"%@", responseXML);
-}
-
-- (void)lx_stopResponse {
-    NSLog(@"播放停止");
+- (void)lx_removeSubscirbeSuccessOrFail:(BOOL)succesOrFail {
+    if (succesOrFail) {
+        NSLog(@"退订成功！！！！");
+    } else {
+        NSLog(@"退订失败~~~~~");
+    }
 }
 
 #pragma mark - action
@@ -74,34 +77,34 @@
 
 - (IBAction)stop:(id)sender {
     [_control stop];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)downVolume:(id)sender {
     [_control setVolumeIncre:-5];
-//    [_control setVolume:2];
+    //    [_control setVolume:2];
 }
 
 - (IBAction)upVolume:(id)sender {
     [_control setVolumeIncre:5];
-//    [_control setVolume:100];
+    //    [_control setVolume:100];
 }
 
 - (IBAction)seekGo:(id)sender {
-//    [_control seekToTime:_currentTime + 10];
+    //    [_control seekToTime:_currentTime + 10];
     [_control seekToTimeIncre:10];
 }
 
 - (IBAction)seekBack:(id)sender {
-//    [_control seekToTime:_currentTime - 10];
+    //    [_control seekToTime:_currentTime - 10];
     [_control seekToTimeIncre:-10];
 }
 
 - (IBAction)previous:(id)sender {
+    [_subscribe removeSubscirbeWithServiceType:LXUPnPDevice_ServiceType_AVTransport];
 }
 
 - (IBAction)next:(id)sender {
-    [_control getVolume];
+    [_subscribe contractSubscirbeWithTime:30 serviceType:LXUPnPDevice_ServiceType_AVTransport];
 }
 
 - (IBAction)switch:(id)sender {

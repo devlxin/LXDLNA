@@ -7,5 +7,6 @@ workspace 'DLNADemo'
 target 'DLNADemo' do
 
 pod 'CocoaAsyncSocket', '~> 7.6.3'
+pod 'GCDWebServer/Core', '~> 3.5.3'
 
 end

@@ -9,6 +9,7 @@
 #import "LXControlDevice.h"
 #import "GDataXMLNode.h"
 #import "LXUPnPDevice.h"
+#import "LXUPnPStatusInfo.h"
 
 typedef struct {
     unsigned int isExistSetAVTransportURLReponseDelegate:1;
@@ -336,9 +337,7 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
     NSString *url = [self _getPostURL:serviceType]; if (LXDLNA_kStringIsEmpty(url)) return;
     NSString *postXMLString = [self _getPostXMLString:xmlBody serviceType:serviceType]; if (LXDLNA_kStringIsEmpty(postXMLString)) return;
     NSString *SOAPAction = [self _getSOAPAction:action serviceType:serviceType]; if (LXDLNA_kStringIsEmpty(SOAPAction)) return;
-    
-    NSLog(@"请求：%@", postXMLString);
-    
+        
     NSURL *URL = [NSURL URLWithString:url];
     NSURLSession *session = [NSURLSession sharedSession];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
@@ -353,7 +352,6 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
             }
             return;
         } else {
-            NSLog(@"响应：%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             [self _postResponse:data];
         }
     }];
@@ -403,77 +401,6 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
             (int)(timeValue / 3600.0),
             (int)(fmod(timeValue, 3600.0) / 60.0),
             (int)fmod(timeValue, 60.0)];
-}
-
-@end
-
-@implementation LXUPnPTransportInfo
-
-- (void)setArray:(NSArray *)array {
-    @autoreleasepool {
-        for (int m = 0; m < array.count; m++) {
-            GDataXMLElement *needEle = [array objectAtIndex:m];
-            if ([needEle.name isEqualToString:@"CurrentTransportState"]) {
-                self.currentTransportState = [needEle stringValue];
-            }
-            if ([needEle.name isEqualToString:@"CurrentTransportStatus"]) {
-                self.currentTransportStatus = [needEle stringValue];
-            }
-            if ([needEle.name isEqualToString:@"CurrentSpeed"]) {
-                self.currentSpeed = [needEle stringValue];
-            }
-        }
-    }
-}
-
-@end
-
-@implementation LXUPnPAVPositionInfo
-
-- (void)setArray:(NSArray *)array {
-    @autoreleasepool {
-        for (int m = 0; m < array.count; m++) {
-            GDataXMLElement *needEle = [array objectAtIndex:m];
-            if ([needEle.name isEqualToString:@"TrackDuration"]) {
-                self.trackDuration = [self _durationTime:[needEle stringValue]];
-            }
-            if ([needEle.name isEqualToString:@"RelTime"]) {
-                self.relTime = [self _durationTime:[needEle stringValue]];
-            }
-            if ([needEle.name isEqualToString:@"AbsTime"]) {
-                self.absTime = [self _durationTime:[needEle stringValue]];
-            }
-        }
-    }
-}
-
-- (float)_durationTime:(NSString *)timeStr {
-    NSArray *timeStrings = [timeStr componentsSeparatedByString:@":"];
-    int timeStringsCount = (int)[timeStrings count];
-    if (timeStringsCount < 3)
-        return -1.0f;
-    float durationTime = 0.0;
-    for (int n = 0; n<timeStringsCount; n++) {
-        NSString *timeString = [timeStrings objectAtIndex:n];
-        int timeIntValue = [timeString intValue];
-        switch (n) {
-            case 0: // HH
-                durationTime += timeIntValue * (60 * 60);
-                break;
-            case 1: // MM
-                durationTime += timeIntValue * 60;
-                break;
-            case 2: // SS
-                durationTime += timeIntValue;
-                break;
-            case 3: // .F?
-                durationTime += timeIntValue * 0.1;
-                break;
-            default:
-                break;
-        }
-    }
-    return durationTime;
 }
 
 @end

@@ -22,6 +22,8 @@
 		4F1DADDC2383F201003F2E4C /* FindDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1DADDB2383F201003F2E4C /* FindDeviceController.m */; };
 		4F1DADEB2384459C003F2E4C /* ControlDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1DADE92384459C003F2E4C /* ControlDeviceController.m */; };
 		4F1DADEC2384459C003F2E4C /* ControlDeviceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1DADEA2384459C003F2E4C /* ControlDeviceController.xib */; };
+		4F1DADF22386275A003F2E4C /* LXSubscribeDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1DADF12386275A003F2E4C /* LXSubscribeDevice.m */; };
+		4F1DADF523865D15003F2E4C /* LXUPnPStatusInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1DADF423865D15003F2E4C /* LXUPnPStatusInfo.m */; };
 		92D1A8D47A015FB0CA4A3A3C /* Pods_DLNADemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E7AF35BC0D24438C46B6F3A /* Pods_DLNADemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,10 @@
 		4F1DADE92384459C003F2E4C /* ControlDeviceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControlDeviceController.m; sourceTree = "<group>"; };
 		4F1DADEA2384459C003F2E4C /* ControlDeviceController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ControlDeviceController.xib; sourceTree = "<group>"; };
 		4F1DADED2384E3DB003F2E4C /* LXDLNA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXDLNA.h; sourceTree = "<group>"; };
+		4F1DADF02386275A003F2E4C /* LXSubscribeDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXSubscribeDevice.h; sourceTree = "<group>"; };
+		4F1DADF12386275A003F2E4C /* LXSubscribeDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXSubscribeDevice.m; sourceTree = "<group>"; };
+		4F1DADF323865D15003F2E4C /* LXUPnPStatusInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXUPnPStatusInfo.h; sourceTree = "<group>"; };
+		4F1DADF423865D15003F2E4C /* LXUPnPStatusInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXUPnPStatusInfo.m; sourceTree = "<group>"; };
 		7E7AF35BC0D24438C46B6F3A /* Pods_DLNADemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DLNADemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9020E6AE4E026F9B43FCD194 /* Pods-DLNADemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DLNADemo.debug.xcconfig"; path = "Target Support Files/Pods-DLNADemo/Pods-DLNADemo.debug.xcconfig"; sourceTree = "<group>"; };
 		EB63EE1404D08B01B4BFA12D /* Pods-DLNADemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DLNADemo.release.xcconfig"; path = "Target Support Files/Pods-DLNADemo/Pods-DLNADemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,10 +126,14 @@
 				4F1DADD12383DFE1003F2E4C /* GDataXML */,
 				4F1DADD02383D793003F2E4C /* LXUPnPDevice.h */,
 				4F1DADCE2383D41F003F2E4C /* LXUPnPDevice.m */,
+				4F1DADF323865D15003F2E4C /* LXUPnPStatusInfo.h */,
+				4F1DADF423865D15003F2E4C /* LXUPnPStatusInfo.m */,
 				4F1DADC72383B551003F2E4C /* LXFindDevice.h */,
 				4F1DADC82383B551003F2E4C /* LXFindDevice.m */,
 				4F1DADCA2383B570003F2E4C /* LXControlDevice.h */,
 				4F1DADCB2383B570003F2E4C /* LXControlDevice.m */,
+				4F1DADF02386275A003F2E4C /* LXSubscribeDevice.h */,
+				4F1DADF12386275A003F2E4C /* LXSubscribeDevice.m */,
 				4F1DADED2384E3DB003F2E4C /* LXDLNA.h */,
 			);
 			path = LXDLNA;
@@ -276,6 +286,8 @@
 				4F1DADB52383B454003F2E4C /* ViewController.m in Sources */,
 				4F1DADD42383DFF7003F2E4C /* GDataXMLNode.m in Sources */,
 				4F1DADEB2384459C003F2E4C /* ControlDeviceController.m in Sources */,
+				4F1DADF523865D15003F2E4C /* LXUPnPStatusInfo.m in Sources */,
+				4F1DADF22386275A003F2E4C /* LXSubscribeDevice.m in Sources */,
 				4F1DADAF2383B454003F2E4C /* AppDelegate.m in Sources */,
 				4F1DADC92383B551003F2E4C /* LXFindDevice.m in Sources */,
 				4F1DADC02383B455003F2E4C /* main.m in Sources */,
