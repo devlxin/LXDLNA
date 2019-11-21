@@ -7,7 +7,7 @@
 //
 
 #import "LXFindDevice.h"
-#import <GCDAsyncUdpSocket.h>
+#import "GCDAsyncUdpSocket.h"
 #import "LXUPnPDevice.h"
 #import "GDataXMLNode.h"
 

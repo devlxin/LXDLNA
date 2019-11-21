@@ -6,4 +6,4 @@ project.xcworkspace/
 xcuserdata/
 UserInterface.xcuserstate
 .DS_Store
-.podspec
+*.podspec

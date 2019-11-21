@@ -8,7 +8,7 @@
 
 #import "LXSubscribeDevice.h"
 #import <GCDWebServer/GCDWebServer.h>
-#import <GCDWebServerDataRequest.h>
+#import "GCDWebServerDataRequest.h"
 #import "GDataXMLNode.h"
 #import "LXUPnPDevice.h"
 
