@@ -78,12 +78,12 @@
 }
 
 - (IBAction)downVolume:(id)sender {
-    [_control setVolumeIncre:-1];
+    [_control setVolumeIncre:-5];
 //    [_control setVolume:2];
 }
 
 - (IBAction)upVolume:(id)sender {
-    [_control setVolumeIncre:1];
+    [_control setVolumeIncre:5];
 //    [_control setVolume:100];
 }
 

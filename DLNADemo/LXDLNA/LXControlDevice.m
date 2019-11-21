@@ -45,6 +45,7 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
 }
 
 @property (nonatomic, assign) LXControlDeviceDelegateFlags delegateFlags;
+@property (nonatomic, assign) int localVolume;
 
 @end
 
@@ -53,6 +54,7 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
 - (instancetype)initWithDevice:(LXUPnPDevice *)device {
     self = [super init];
     self.device = device;
+    self.localVolume = -1;
     return self;
 }
 
@@ -207,7 +209,15 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
 - (void)setVolumeIncre:(int)volumeIncre {
     __weak typeof(self) weakSelf = self;
     [self getVolume:^(int volume) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            if (volume == 100) {
+                weakSelf.localVolume = 20;
+            }
+        });
+        if (weakSelf.localVolume != -1) volume = weakSelf.localVolume;
         [weakSelf setVolume:volume + volumeIncre];
+        weakSelf.localVolume = volume + volumeIncre;
     }];
 }
 

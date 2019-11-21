@@ -79,6 +79,8 @@ static NSString *LXControlDevice_Unit_TRACK_NR = @"TRACK_NR";
 /// @param volume  音量(0-100)
 - (void)setVolume:(int)volume;
 /// 设置音量增量
+/// @discussion  部分电视机型初次获取到当前音量为100，并且只能将真实音量设置到20(比如创维)，建议增量为5(参考爱奇艺的解决方式)
+///                   在此LXDLNA解决方式为：初次获取到音量为100时，默认其获取不到真实设备音量，将其音量初始化为20(真实音量为5)
 /// @param volumeIncre  音量增量，例如：-5，5
 - (void)setVolumeIncre:(int)volumeIncre;
 /// 获取音量，音量通过Delegate返回
