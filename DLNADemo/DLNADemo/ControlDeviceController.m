@@ -41,7 +41,7 @@
 }
 
 - (void)lx_getPositionInfoResponse:(LXUPnPAVPositionInfo *)info {
-    [_subscribe sendSubcirbeWithTime:info.trackDuration serviceType:LXUPnPDevice_ServiceType_AVTransport];
+    [_subscribe sendSubcirbeWithTime:info.trackDuration serviceType:LXUPnPDevice_ServiceType_RenderingControl];
 }
 
 #pragma mark - LXSubscribeDeviceDelegate
@@ -105,11 +105,9 @@
 }
 
 - (IBAction)previous:(id)sender {
-    [_subscribe removeSubscirbeWithServiceType:LXUPnPDevice_ServiceType_AVTransport];
 }
 
 - (IBAction)next:(id)sender {
-    [_subscribe contractSubscirbeWithTime:30 serviceType:LXUPnPDevice_ServiceType_AVTransport];
 }
 
 - (IBAction)switch:(id)sender {

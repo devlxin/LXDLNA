@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @required
 - (void)lx_subcirbeTransportStateCallback:(NSString *)transportState;
 - (void)lx_subcirbeRelativeTimePositionCallback:(NSString *)relativeTimePosition;
+- (void)lx_subcirbeVolumeCallback:(int)volume;
 
 @optional
 - (void)lx_subcirbeSuccessOrFail:(BOOL)succesOrFail;

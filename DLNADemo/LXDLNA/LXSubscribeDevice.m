@@ -14,7 +14,8 @@
 
 typedef struct {
     unsigned int isExistSubcirbeTransportStateCallbackDelegate:1;
-    unsigned int isExistSubcirbeRelativeTimePositionDelegate:1;
+    unsigned int isExistSubcirbeRelativeTimePositionCallbackDelegate:1;
+    unsigned int isExistSubcirbeVolumeCallbackDelegate:1;
 } LXSubscribeDeviceDelegateFlags;
 
 @interface LXSubscribeDevice()
@@ -40,10 +41,12 @@ typedef struct {
     _delegate = delegate;
     if (_delegate) {
         _delegateFlags.isExistSubcirbeTransportStateCallbackDelegate = [_delegate respondsToSelector:@selector(lx_subcirbeTransportStateCallback:)];
-        _delegateFlags.isExistSubcirbeRelativeTimePositionDelegate = [_delegate respondsToSelector:@selector(lx_subcirbeRelativeTimePositionCallback:)];
+        _delegateFlags.isExistSubcirbeRelativeTimePositionCallbackDelegate = [_delegate respondsToSelector:@selector(lx_subcirbeRelativeTimePositionCallback:)];
+        _delegateFlags.isExistSubcirbeVolumeCallbackDelegate = [_delegate respondsToSelector:@selector(lx_subcirbeVolumeCallback:)];
     } else {
         _delegateFlags.isExistSubcirbeTransportStateCallbackDelegate = 0;
-        _delegateFlags.isExistSubcirbeRelativeTimePositionDelegate = 0;
+        _delegateFlags.isExistSubcirbeRelativeTimePositionCallbackDelegate = 0;
+        _delegateFlags.isExistSubcirbeVolumeCallbackDelegate = 0;
     }
 }
 
@@ -135,12 +138,20 @@ typedef struct {
                                         }
                                         if ([[needElement name] isEqualToString:@"RelativeTimePosition"]) {
                                             NSString *relativeTimePosition =  [[needElement attributeForName:@"val"] stringValue];
-                                            if (self.delegateFlags.isExistSubcirbeRelativeTimePositionDelegate) {
+                                            if (self.delegateFlags.isExistSubcirbeRelativeTimePositionCallbackDelegate) {
                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                     [self.delegate lx_subcirbeRelativeTimePositionCallback:relativeTimePosition];
                                                 });
                                             }
                                             self.isRelativeTimePositionEnabled = YES;
+                                        }
+                                        if ([[needElement name] isEqualToString:@"Volume"]) {
+                                            NSString *volume =  [[needElement attributeForName:@"val"] stringValue];
+                                            if (self.delegateFlags.isExistSubcirbeVolumeCallbackDelegate) {
+                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                    [self.delegate lx_subcirbeVolumeCallback:volume.intValue];
+                                                });
+                                            }
                                         }
                                     }
                                 }

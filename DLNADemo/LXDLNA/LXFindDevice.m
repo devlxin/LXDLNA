@@ -69,17 +69,17 @@ static NSString *LXSSDP_IPv6Address = @"FF0x::C";
 - (void)startFindDevice {
     NSError *error = nil;
     if (![self.udpSocket bindToPort:LXSSDP_IPv4Port error:&error]) {
-        if (self.delegateFlags.isExistUPnPDeviceChangedDelegate) {
+        if (self.delegateFlags.isExistUPnPDeviceFindFaildDelegate) {
             [self.delegate lx_UPnPDeviceFindFaild:error];
         }
     }
     if (![self.udpSocket beginReceiving:&error]) {
-        if (self.delegateFlags.isExistUPnPDeviceChangedDelegate) {
+        if (self.delegateFlags.isExistUPnPDeviceFindFaildDelegate) {
             [self.delegate lx_UPnPDeviceFindFaild:error];
         }
     }
     if (![self.udpSocket joinMulticastGroup:LXSSDP_IPv4Address error:&error]) {
-        if (self.delegateFlags.isExistUPnPDeviceChangedDelegate) {
+        if (self.delegateFlags.isExistUPnPDeviceFindFaildDelegate) {
             [self.delegate lx_UPnPDeviceFindFaild:error];
         }
     }
@@ -186,7 +186,7 @@ static NSString *LXSSDP_IPv6Address = @"FF0x::C";
     request.HTTPMethod = @"GET";
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
-            if (weakSelf.delegateFlags.isExistUPnPDeviceChangedDelegate) {
+            if (weakSelf.delegateFlags.isExistUPnPDeviceFindFaildDelegate) {
                 [weakSelf.delegate lx_UPnPDeviceFindFaild:error];
             }
         } else {
