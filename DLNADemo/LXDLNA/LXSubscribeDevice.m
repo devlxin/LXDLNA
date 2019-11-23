@@ -29,6 +29,13 @@ typedef struct {
 
 @implementation LXSubscribeDevice
 
+- (instancetype)init {
+    self = [super init];
+    self.isRelativeTimePositionEnabled = NO;
+    self.sidDict = @{}.mutableCopy;
+    return self;
+}
+
 - (instancetype)initWithDevice:(LXUPnPDevice *)device {
     self = [super init];
     self.device = device;

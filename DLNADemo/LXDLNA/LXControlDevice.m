@@ -52,6 +52,12 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
 
 @implementation LXControlDevice
 
+- (instancetype)init {
+    self = [super init];
+    self.localVolume = -1;
+    return self;
+}
+
 - (instancetype)initWithDevice:(LXUPnPDevice *)device {
     self = [super init];
     self.device = device;
