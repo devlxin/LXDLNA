@@ -283,6 +283,7 @@ typedef struct {
     if(LXDLNA_kStringIsEmpty(string)) return nil;
     NSString *result = [string stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
     result = [result stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
+    result = [result stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
     return result;
 }
 

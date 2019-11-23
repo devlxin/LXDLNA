@@ -36,6 +36,8 @@
     @autoreleasepool {
         for (int m = 0; m < array.count; m++) {
             GDataXMLElement *needEle = [array objectAtIndex:m];
+            NSLog(@"name:%@", needEle.name);
+            NSLog(@"value:%@", needEle.stringValue);
             if ([needEle.name isEqualToString:@"TrackDuration"]) {
                 self.trackDuration = [self _durationTime:[needEle stringValue]];
             }

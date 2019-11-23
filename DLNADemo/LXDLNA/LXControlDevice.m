@@ -255,68 +255,48 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
                 GDataXMLElement *ele = [needArr objectAtIndex:i];
                 if ([[ele name] hasSuffix:@"SetAVTransportURIResponse"]) {
                     if (self.delegateFlags.isExistSetAVTransportURLReponseDelegate) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.delegate lx_setAVTransportURLReponse];
-                        });
+                        [self.delegate lx_setAVTransportURLReponse];
                     }
                     [self getTransportInfo];
                     [self getPositionInfo];
                 } else if ([[ele name] hasSuffix:@"SetNextAVTransportURIResponse"]) {
                     if (self.delegateFlags.isExistSetNextAVTransportURLResponseDelegate) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.delegate lx_setNextAVTransportURLResponse];
-                        });
+                        [self.delegate lx_setNextAVTransportURLResponse];
                     }
                 } else if ([[ele name] hasSuffix:@"PlayResponse"]) {
                     if (self.delegateFlags.isExistPlayResponseDelegate) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.delegate lx_playResponse];
-                        });
+                        [self.delegate lx_playResponse];
                     }
                 } else if ([[ele name] hasSuffix:@"PauseResponse"]) {
                     if (self.delegateFlags.isExistPauseResponseDelegate) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.delegate lx_pauseResponse];
-                        });
+                        [self.delegate lx_pauseResponse];
                     }
                 } else if ([[ele name] hasSuffix:@"StopResponse"]){
                     if (self.delegateFlags.isExistStopResponseDelegate) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.delegate lx_stopResponse];
-                        });
+                        [self.delegate lx_stopResponse];
                     }
                 } else if ([[ele name] hasSuffix:@"SeekResponse"]) {
                     if (self.delegateFlags.isExistSeekResponseDelegate) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.delegate lx_seekResponse];
-                        });
+                        [self.delegate lx_seekResponse];
                     }
                 } else if ([[ele name] hasSuffix:@"NextResponse"]) {
                     if (self.delegateFlags.isExistNextResponseDelegate) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.delegate lx_nextResponse];
-                        });
+                        [self.delegate lx_nextResponse];
                     }
                 } else if ([[ele name] hasSuffix:@"PreviousResponse"]) {
                     if (self.delegateFlags.isExistPreviousResponseDelegate) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.delegate lx_previousResponse];
-                        });
+                        [self.delegate lx_previousResponse];
                     }
                 } else if ([[ele name] hasSuffix:@"SetVolumeResponse"]) {
                     if (self.delegateFlags.isExistSetVolumeResponseDelegate) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.delegate lx_setVolumeResponse];
-                        });
+                        [self.delegate lx_setVolumeResponse];
                     }
                 } else if ([[ele name] hasSuffix:@"GetVolumeResponse"]) {
                     if (self.delegateFlags.isExistGetVolumeResponseDelegate) {
                         for (int j = 0; j < [ele children].count; j++) {
                             GDataXMLElement *eleXml = [[ele children] objectAtIndex:j];
                             if ([[eleXml name] isEqualToString:@"CurrentVolume"]) {
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    [self.delegate lx_getVolumeResponse:[eleXml stringValue]];
-                                });
+                                [self.delegate lx_getVolumeResponse:[eleXml stringValue]];
                             }
                         }
                     }
@@ -324,9 +304,7 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
                         for (int j = 0; j < [ele children].count; j++) {
                             GDataXMLElement *eleXml = [[ele children] objectAtIndex:j];
                             if ([[eleXml name] isEqualToString:@"CurrentVolume"]) {
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    self->_getVolumeCompleteBlock([eleXml stringValue].intValue);
-                                });
+                                self->_getVolumeCompleteBlock([eleXml stringValue].intValue);
                             }
                         }
                     }
@@ -334,38 +312,28 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
                     if (self.delegateFlags.isExistGetPositionInfoResponseDelegate) {
                         LXUPnPAVPositionInfo *info = [[LXUPnPAVPositionInfo alloc] init];
                         [info setArray:[ele children]];
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.delegate lx_getPositionInfoResponse:info];
-                        });
+                        [self.delegate lx_getPositionInfoResponse:info];
                     }
                     if (_getPositionInfoCompleteBlock) {
                         LXUPnPAVPositionInfo *info = [[LXUPnPAVPositionInfo alloc] init];
                         [info setArray:[ele children]];
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            self->_getPositionInfoCompleteBlock(info);
-                        });
+                        self->_getPositionInfoCompleteBlock(info);
                     }
                 } else if ([[ele name] hasSuffix:@"GetTransportInfoResponse"]) {
                     if (self.delegateFlags.isExistGetTransportInfoResponseDelegate) {
                         LXUPnPTransportInfo *info = [[LXUPnPTransportInfo alloc] init];
                         [info setArray:[ele children]];
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.delegate lx_getTransportInfoResponse:info];
-                        });
+                        [self.delegate lx_getTransportInfoResponse:info];
                     }
                 } else {
                     if (self.delegateFlags.isExistUndefinedResponseDelegate) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.delegate lx_undefinedResponse:[ele XMLString]];
-                        });
+                        [self.delegate lx_undefinedResponse:[ele XMLString]];
                     }
                 }
             }
         } else {
             if (self.delegateFlags.isExistUndefinedResponseDelegate) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.delegate lx_undefinedResponse:[xmlEle XMLString]];
-                });
+                [self.delegate lx_undefinedResponse:[xmlEle XMLString]];
             }
         }
     }
@@ -393,7 +361,9 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
             }
             return;
         } else {
-            [self _postResponse:data];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self _postResponse:data];
+            });
         }
     }];
     [dataTask resume];
