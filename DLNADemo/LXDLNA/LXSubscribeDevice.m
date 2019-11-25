@@ -64,6 +64,10 @@ typedef struct {
     
     if (time <= 0) time = 3600;
     
+    if (self.sidDict) {
+        [self.sidDict removeAllObjects];
+    }
+    
     NSString *callbackUrlStr = [self _startWebServer];
     [self _post:callbackUrlStr time:time serviceType:serviceType];
 }
@@ -168,9 +172,6 @@ typedef struct {
 }
 
 - (void)_stopWebServer {
-    if (self.sidDict) {
-        [self.sidDict removeAllObjects];
-    }
     if (self.webServer) {
         if (self.webServer.isRunning) {
             [self.webServer stop];
