@@ -168,6 +168,9 @@ typedef struct {
 }
 
 - (void)_stopWebServer {
+    if (self.sidDict) {
+        [self.sidDict removeAllObjects];
+    }
     if (self.webServer) {
         if (self.webServer.isRunning) {
             [self.webServer stop];
