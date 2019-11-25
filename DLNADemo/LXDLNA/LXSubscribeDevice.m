@@ -82,6 +82,7 @@ typedef struct {
     NSString *serverUrlStr = self.webServer.serverURL.absoluteString;
     NSString *callbackUrlStr = [NSString stringWithFormat:@"%@dlna/callback", serverUrlStr];
     [self _post:callbackUrlStr time:0 serviceType:serviceType];
+    [self.sidDict removeObjectForKey:serviceType];
 }
 
 #pragma mark - server callback
