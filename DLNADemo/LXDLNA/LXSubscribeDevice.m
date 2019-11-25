@@ -169,7 +169,9 @@ typedef struct {
 
 - (void)_stopWebServer {
     if (self.webServer) {
-        [self.webServer stop];
+        if (self.webServer.isRunning) {
+            [self.webServer stop];
+        }
         self.webServer = nil;
     }
 }
