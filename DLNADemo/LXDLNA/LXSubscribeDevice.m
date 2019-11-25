@@ -111,7 +111,7 @@ typedef struct {
         GCDWebServerResponse *response = [[GCDWebServerResponse alloc] initWithStatusCode:200];
         return response;
     }];
-    [self.webServer start];
+    [self.webServer startWithPort:8080 bonjourName:nil];
     NSString *serverUrlStr = self.webServer.serverURL.absoluteString;
     return [NSString stringWithFormat:@"%@dlna/callback", serverUrlStr];
 }
