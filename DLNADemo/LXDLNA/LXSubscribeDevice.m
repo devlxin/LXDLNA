@@ -62,11 +62,11 @@ typedef struct {
         return;
     }
     
-    if (self.sidDict && [self.sidDict.allValues containsObject:serviceType]) {
+    if (time <= 0) time = 3600;
+    
+    if (self.sidDict && [self.sidDict.allKeys containsObject:serviceType]) {
         [self.sidDict removeObjectForKey:serviceType];
     }
-    
-    if (time <= 0) time = 3600;
     
     NSString *callbackUrlStr = [self _startWebServer];
     [self _post:callbackUrlStr time:time serviceType:serviceType];
@@ -238,8 +238,8 @@ typedef struct {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self.delegate lx_removeSubscirbeSuccessOrFail:YES];
                         });
-                        [self.sidDict removeObjectForKey:serviceType];
                     }
+                    [self.sidDict removeObjectForKey:serviceType];
                 } else {
                     if (self.delegate && [self.delegate respondsToSelector:@selector(lx_contractSubscirbeSuccessOrFail:)]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
