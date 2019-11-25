@@ -111,7 +111,7 @@ typedef struct {
         GCDWebServerResponse *response = [[GCDWebServerResponse alloc] initWithStatusCode:200];
         return response;
     }];
-    [self.webServer startWithPort:8080 bonjourName:nil];
+    [self.webServer start];
     NSString *serverUrlStr = self.webServer.serverURL.absoluteString;
     return [NSString stringWithFormat:@"%@dlna/callback", serverUrlStr];
 }
@@ -175,6 +175,7 @@ typedef struct {
     if (self.webServer) {
         if (self.webServer.isRunning) {
             [self.webServer stop];
+            [self.webServer removeAllHandlers];
         }
         self.webServer = nil;
     }
