@@ -62,11 +62,11 @@ typedef struct {
         return;
     }
     
-    if (time <= 0) time = 3600;
-    
-    if (self.sidDict) {
-        [self.sidDict removeAllObjects];
+    if (self.sidDict && [self.sidDict.allValues containsObject:serviceType]) {
+        [self.sidDict removeObjectForKey:serviceType];
     }
+    
+    if (time <= 0) time = 3600;
     
     NSString *callbackUrlStr = [self _startWebServer];
     [self _post:callbackUrlStr time:time serviceType:serviceType];
