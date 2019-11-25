@@ -82,7 +82,6 @@ typedef struct {
     NSString *serverUrlStr = self.webServer.serverURL.absoluteString;
     NSString *callbackUrlStr = [NSString stringWithFormat:@"%@dlna/callback", serverUrlStr];
     [self _post:callbackUrlStr time:0 serviceType:serviceType];
-    [self.sidDict removeObjectForKey:serviceType];
 }
 
 #pragma mark - server callback
@@ -254,10 +253,12 @@ typedef struct {
                 }
             }
         }
-       NSHTTPURLResponse *resultResponse = (NSHTTPURLResponse*)response;
-       NSString *sid = [resultResponse.allHeaderFields valueForKey:@"SID"];
-       if(!LXDLNA_kStringIsEmpty(sid)) {
-            [self.sidDict setValue:sid forKey:serviceType];
+        if (time > 0) {
+            NSHTTPURLResponse *resultResponse = (NSHTTPURLResponse*)response;
+            NSString *sid = [resultResponse.allHeaderFields valueForKey:@"SID"];
+            if(!LXDLNA_kStringIsEmpty(sid)) {
+                 [self.sidDict setValue:sid forKey:serviceType];
+             }
         }
     }];
     [dataTask resume];
