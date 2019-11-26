@@ -11,6 +11,8 @@
 #import "LXUPnPDevice.h"
 #import "LXUPnPStatusInfo.h"
 
+#define LXDLNA_DIDL @"<DIDL-Lite xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" xmlns:dlna=\"urn:schemas-dlna-org:metadata-1-0/\"><item id=\"id\" parentID=\"0\" restricted=\"0\"><dc:title>name</dc:title><upnp:artist>unknow</upnp:artist><upnp:class>object.item.videoItem</upnp:class><dc:date>2019-11-26T10:29:27</dc:date><res protocolInfo=\"http-get:*:*/*:*\"  >%@</res></item></DIDL-Lite>"
+
 typedef struct {
     unsigned int isExistSetAVTransportURLReponseDelegate:1;
     unsigned int isExistGetTransportInfoResponseDelegate:1;
@@ -106,7 +108,7 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
     GDataXMLElement *XMLElement = [GDataXMLElement elementWithName:name];
     [XMLElement addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
     [XMLElement addChild:[GDataXMLElement elementWithName:@"CurrentURI" stringValue:url]];
-    [XMLElement addChild:[GDataXMLElement elementWithName:@"CurrentURIMetaData" stringValue:@""]];
+    [XMLElement addChild:[GDataXMLElement elementWithName:@"CurrentURIMetaData" stringValue:LXDLNA_DIDL]];
     [self _postAction:LXControlDevice_Action_SetAVTransportURI body:XMLElement serviceType:LXUPnPDevice_ServiceType_AVTransport];
 }
 
