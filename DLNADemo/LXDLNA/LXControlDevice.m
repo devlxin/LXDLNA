@@ -119,7 +119,7 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
     GDataXMLElement *XMLElement = [GDataXMLElement elementWithName:name];
     [XMLElement addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
     [XMLElement addChild:[GDataXMLElement elementWithName:@"NextURI" stringValue:nextUrl]];
-    [XMLElement addChild:[GDataXMLElement elementWithName:@"NextURIMetaData" stringValue:@""]];
+    [XMLElement addChild:[GDataXMLElement elementWithName:@"NextURIMetaData" stringValue:[NSString stringWithFormat:LXDLNA_DIDL, nextUrl]]];
     [self _postAction:LXControlDevice_Action_SetNextAVTransportURI body:XMLElement serviceType:LXUPnPDevice_ServiceType_AVTransport];
 }
 
