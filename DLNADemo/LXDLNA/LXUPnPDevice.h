@@ -12,6 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define LXDLNA_kStringIsEmpty(str) ([str isKindOfClass:[NSNull class]] || str == nil || [str length] < 1 ? YES : NO)
 
+#ifdef DEBUG
+#define LXDLNA_Log(...) NSLog(__VA_ARGS__)
+#else
+#define LXDLNA_Log(...)
+#endif
+
 @class LXUPnPDeviceService;
 
 static NSString *LXUPnPDevice_ServiceType_AVTransport = @"urn:schemas-upnp-org:service:AVTransport:1";

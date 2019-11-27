@@ -11,7 +11,7 @@
 #import "LXUPnPDevice.h"
 #import "LXUPnPStatusInfo.h"
 
-#define LXDLNA_DIDL @"<DIDL-Lite xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" xmlns:dlna=\"urn:schemas-dlna-org:metadata-1-0/\"><item id=\"id\" parentID=\"0\" restricted=\"0\"><dc:title>name</dc:title><upnp:artist>unknow</upnp:artist><upnp:class>object.item.videoItem</upnp:class><dc:date>2019-11-26T10:29:27</dc:date><res protocolInfo=\"http-get:*:*/*:*\"  >%@</res></item></DIDL-Lite>"
+#define LXDLNA_DIDL @"<?xml version=\"1.0\"?><DIDL-Lite xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" xmlns:dlna=\"urn:schemas-dlna-org:metadata-1-0/\"><item id=\"id\" parentID=\"0\" restricted=\"0\"><dc:title>name</dc:title><upnp:artist>unknow</upnp:artist><upnp:class>object.item.videoItem</upnp:class><res protocolInfo=\"http-get:*:*/*:*\"  >%@</res></item></DIDL-Lite>"
 
 typedef struct {
     unsigned int isExistSetAVTransportURLReponseDelegate:1;
@@ -206,6 +206,7 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
 #pragma mark RenderingControl
 - (void)setVolume:(int)volume {
     if (volume < 0) volume = 0;
+    if (volume > 100) volume = 100;
     
     NSString *name = [NSString stringWithFormat:@"u:%@", LXControlDevice_Action_SetVolume];
     GDataXMLElement *XMLElement = [GDataXMLElement elementWithName:name];
@@ -227,6 +228,9 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
         if (weakSelf.localVolume != -1) volume = weakSelf.localVolume;
         [weakSelf setVolume:volume + volumeIncre];
         weakSelf.localVolume = volume + volumeIncre;
+        
+        if (weakSelf.localVolume <= 0) weakSelf.localVolume = 0;
+        if (weakSelf.localVolume >= 100) weakSelf.localVolume = 100;
     }];
 }
 
@@ -361,11 +365,16 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
                     [self.delegate lx_undefinedResponse:error.localizedDescription];
                 });
             }
+            LXDLNA_Log(@"%@", error.localizedDescription);
             return;
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self _postResponse:data];
             });
+#ifdef DEBUG
+            NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            LXDLNA_Log(@"%@", dataString);
+#endif
         }
     }];
     [dataTask resume];
