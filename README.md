@@ -19,7 +19,6 @@ https://github.com/MQL9011/MRDLNA
 ### Usage
 
 ```ruby
-#use_frameworks!
 pod 'LXDLNA'
 ```
 
