@@ -11,7 +11,8 @@
 #import "LXUPnPDevice.h"
 #import "LXUPnPStatusInfo.h"
 
-#define LXDLNA_DIDL @"<?xml version=\"1.0\"?><DIDL-Lite xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" xmlns:dlna=\"urn:schemas-dlna-org:metadata-1-0/\"><item id=\"id\" parentID=\"0\" restricted=\"0\"><dc:title>name</dc:title><upnp:artist>unknow</upnp:artist><upnp:class>object.item.videoItem</upnp:class><res protocolInfo=\"http-get:*:*/*:*\"  >%@</res></item></DIDL-Lite>"
+#define LXDLNA_DIDL @"<?xml version=\"1.0\"?><DIDL-Lite xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" xmlns:dlna=\"urn:schemas-dlna-org:metadata-1-0/\"><item id=\"f-0\" parentID=\"0\" restricted=\"0\"><dc:title>Video</dc:title><upnp:artist>unknow</upnp:artist><upnp:class>LXControlDevice</upnp:class><res protocolInfo=\"http-get:*:*/*:*\">%@</res></item></DIDL-Lite>"
+#define LXDLNA_DIDL_NO_RES @"<?xml version=\"1.0\" ?><DIDL-Lite xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" xmlns:dlna=\"urn:schemas-dlna-org:metadata-1-0/\"><item id=\"f-0\" parentID=\"0\" restricted=\"0\"><dc:title>Video</dc:title><upnp:artist>unknow</upnp:artist><upnp:class>LXControlDevice</upnp:class></item></DIDL-Lite>"
 
 typedef struct {
     unsigned int isExistSetAVTransportURLReponseDelegate:1;
@@ -109,6 +110,17 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
     [XMLElement addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
     [XMLElement addChild:[GDataXMLElement elementWithName:@"CurrentURI" stringValue:url]];
     [XMLElement addChild:[GDataXMLElement elementWithName:@"CurrentURIMetaData" stringValue:[NSString stringWithFormat:LXDLNA_DIDL, url]]];
+    [self _postAction:LXControlDevice_Action_SetAVTransportURI body:XMLElement serviceType:LXUPnPDevice_ServiceType_AVTransport url:url];
+}
+
+- (void)_setAVTransportURLwithNoResDIDL:(NSString *)url {
+    if (LXDLNA_kStringIsEmpty(url)) return;
+    
+    NSString *name = [NSString stringWithFormat:@"u:%@", LXControlDevice_Action_SetAVTransportURI];
+    GDataXMLElement *XMLElement = [GDataXMLElement elementWithName:name];
+    [XMLElement addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
+    [XMLElement addChild:[GDataXMLElement elementWithName:@"CurrentURI" stringValue:url]];
+    [XMLElement addChild:[GDataXMLElement elementWithName:@"CurrentURIMetaData" stringValue:[NSString stringWithFormat:LXDLNA_DIDL_NO_RES]]];
     [self _postAction:LXControlDevice_Action_SetAVTransportURI body:XMLElement serviceType:LXUPnPDevice_ServiceType_AVTransport];
 }
 
@@ -249,7 +261,7 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
 }
 
 #pragma mark - post response
-- (void)_postResponse:(NSData *)data {
+- (void)_postResponse:(NSData *)data action:(NSString *)action url:(NSString *)url {
     GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithData:data options:0 error:nil];
     GDataXMLElement *xmlEle = [xmlDoc rootElement];
     NSArray *bigArray = [xmlEle children];
@@ -332,6 +344,15 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
                         [self.delegate lx_getTransportInfoResponse:info];
                     }
                 } else {
+                    if ([[ele name] hasSuffix:@"Fault"]) {
+                        /// 修复三星电视不能设置成功设置URI的情况
+                       if ([action isEqualToString:LXControlDevice_Action_SetAVTransportURI] || [action isEqualToString:LXControlDevice_Action_SetNextAVTransportURI]) {
+                           if (!LXDLNA_kStringIsEmpty(url)) {
+                               [self _setAVTransportURLwithNoResDIDL:url];
+                               return;
+                           }
+                       }
+                    }
                     if (self.delegateFlags.isExistUndefinedResponseDelegate) {
                         [self.delegate lx_undefinedResponse:[ele XMLString]];
                     }
@@ -347,6 +368,10 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
 
 #pragma mark - post data
 - (void)_postAction:(NSString *)action body:(GDataXMLElement *)xmlBody serviceType:(NSString *)serviceType {
+    [self _postAction:action body:xmlBody serviceType:serviceType url:nil];
+}
+
+- (void)_postAction:(NSString *)action body:(GDataXMLElement *)xmlBody serviceType:(NSString *)serviceType url:(NSString *)_url {
     NSString *url = [self _getPostURL:serviceType]; if (LXDLNA_kStringIsEmpty(url)) return;
     NSString *postXMLString = [self _getPostXMLString:xmlBody serviceType:serviceType]; if (LXDLNA_kStringIsEmpty(postXMLString)) return;
     NSString *SOAPAction = [self _getSOAPAction:action serviceType:serviceType]; if (LXDLNA_kStringIsEmpty(SOAPAction)) return;
@@ -369,7 +394,7 @@ static NSString *LXControlDevice_Action_SetVolume = @"SetVolume";
             return;
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self _postResponse:data];
+                [self _postResponse:data action:action url:_url];
             });
 #ifdef DEBUG
             NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
